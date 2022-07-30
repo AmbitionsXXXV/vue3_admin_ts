@@ -1,31 +1,29 @@
 {
   "compilerOptions": {
+    // 目标代码（ts -> js(es5/6/7))
     "target": "esnext",
+    // 目标代码需要使用的模块化方案（commentJS）
     "module": "esnext",
+    // 严格模式
     "strict": true,
+    // 对jsx的处理方式
     "jsx": "preserve",
+    // 按照node的方式解析模块
     "moduleResolution": "node",
+    // 跳过对一些库的类型检测
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": true,
+    // 映射文件
     "sourceMap": true,
     "baseUrl": ".",
-    "types": [
-      "webpack-env"
-    ],
+    "types": ["webpack-env", "element-plus/global"],
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
   "include": [
     "src/**/*.ts",
@@ -34,7 +32,5 @@
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
