@@ -21,4 +21,14 @@ const router = createRouter({
   history: createWebHashHistory()
 })
 
+// 获取当前路由是否在login界面
+router.beforeEach((to) => {
+  if (to.path !== '/login') {
+    const token = localCache.getCache('token')
+    if (!token) {
+      return '/login'
+    }
+  }
+})
+
 export default router
