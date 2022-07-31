@@ -1,11 +1,11 @@
 <template>
   <div class="login-user">
-    <el-form label-width="70px" :rules="accountRules" :model="account" ref="formRef">
+    <el-form label-width="70px" :rules="rules" :model="account" ref="formRef">
       <el-form-item label="Account" prop="name">
         <el-input v-model="account.name" />
       </el-form-item>
       <el-form-item label="Password" prop="password">
-        <el-input v-model="account.password" />
+        <el-input v-model="account.password" show-password />
       </el-form-item>
     </el-form>
   </div>
@@ -13,58 +13,45 @@
 
 <script lang="ts">
 import { ElForm } from 'element-plus'
-import { defineComponent } from 'vue'
-import { reactive, ref } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
+import { useStore } from 'vuex'
+import localCache from '@/utils/cache'
+
+import { rules } from '../config/account-config'
 
 export default defineComponent({
   setup() {
+    const store = useStore()
+
     const account = reactive({
-      name: '',
-      password: ''
+      name: localCache.getCache('name') ?? '',
+      password: localCache.getCache('password') ?? ''
     })
 
     const formRef = ref<InstanceType<typeof ElForm>>()
 
-    const loginAction = () => {
+    const loginAction = (isKeepPassword: boolean) => {
       formRef.value?.validate((valid) => {
         if (valid) {
-          console.log('真正执行登录逻辑')
-        } else {
-          console.log(valid)
+          // 1.判断是否记住密码
+          if (isKeepPassword) {
+            // 本地缓存
+            localCache.setCache('name', account.name)
+            localCache.setCache('password', account.password)
+          } else {
+            localCache.removeCache('password')
+          }
+
+          // 2.开始进行登陆验证
+          // 获取账号密码
+          store.dispatch('login/accountLoginAction', { ...account })
         }
       })
     }
 
-    const accountRules = {
-      name: [
-        {
-          required: true,
-          message: '必须输入用户名',
-          trigger: 'blur'
-        },
-        {
-          pattern: /^[a-z0-9]{3,}$/,
-          message: '必须是3位以上数字',
-          trigger: 'blur'
-        }
-      ],
-      password: [
-        {
-          required: true,
-          message: '必须输入密码',
-          trigger: 'blur'
-        },
-        {
-          pattern: /^[a-z0-9]{6,20}$/,
-          message: '必须是6~20个字母或者数字',
-          trigger: 'blur'
-        }
-      ]
-    }
-
     return {
       account,
-      accountRules,
+      rules,
       loginAction,
       formRef
     }

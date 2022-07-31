@@ -1,14 +1,14 @@
 <template>
   <div class="login-panel">
     <h1 class="title">Backstage Management System</h1>
-    <el-tabs type="border-card" stretch>
-      <el-tab-pane name="account">
+    <el-tabs type="border-card" stretch v-model="currentTab">
+      <el-tab-pane name="PC">
         <template #label>
           <span
             ><el-icon><User /></el-icon> Account Login</span
           >
         </template>
-        <login-user ref="accountRef" />
+        <login-user ref="userRef" />
       </el-tab-pane>
       <el-tab-pane name="phone">
         <template #label>
@@ -16,7 +16,7 @@
             ><el-icon><Iphone /></el-icon>Mobile Login</span
           >
         </template>
-        <login-phone />
+        <login-phone ref="phoneRef" />
       </el-tab-pane>
     </el-tabs>
 
@@ -42,18 +42,27 @@ export default defineComponent({
     LoginPhone
   },
   setup() {
+    // 定义属性
     const isKeepPassword = ref(false)
-    const accountRef = ref<InstanceType<typeof LoginUser>>()
+    const userRef = ref<InstanceType<typeof LoginUser>>()
+    const phoneRef = ref<InstanceType<typeof LoginPhone>>()
+    const currentTab = ref('PC')
 
+    // 方法
     const handleLoginClick = () => {
-      console.log('ONE OK ROCK')
-      accountRef.value?.loginAction()
+      if (currentTab.value === 'PC') {
+        userRef.value?.loginAction(isKeepPassword.value)
+      } else {
+        console.log('调用phone登录')
+      }
     }
 
     return {
       isKeepPassword,
-      handleLoginClick,
-      accountRef
+      userRef,
+      phoneRef,
+      currentTab,
+      handleLoginClick
     }
   }
 })

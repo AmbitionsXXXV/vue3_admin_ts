@@ -18,23 +18,3 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
 app.use(router).use(store).use(ElementPlus).mount('#app')
-
-// etcRequest.request({
-//   url: '/home/multidata',
-//   method: 'GET',
-//   interceptors: {
-//     requestInterceptor: (config) => {
-//       console.log('单独请求的config')
-//       return config
-//     },
-//     responseInterceptor: (res) => {
-//       console.log('单独响应的response')
-//       return res
-//     }
-//   }
-// })
-
-etcRequest.request({
-  url: '/home/multidata',
-  method: 'GET'
-})

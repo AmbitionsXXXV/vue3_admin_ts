@@ -1,21 +1,27 @@
-// 1.区分环境变量方式一(不推荐):
-// export const API_BASE_URL = 'https://coderwhy/org/dev'
-// export const API_BASE_URL = 'https://coderwhy/org/prod'
+// 1.方式一: 手动的切换不同的环境(不推荐)
+// const BASE_URL = 'http://coderwhy.org/dev'
+// const BASE_NAME = 'coderwhy'
 
-// 2.区分环境变量方式二:
-let baseURL = ''
-const timeout = 10000
+// const BASE_URL = 'http://coderwhy.org/prod'
+// const BASE_NAME = 'kobe'
 
-if (process.env.NODE_ENV === 'production') {
-  baseURL = 'https://coderwhy/org/prod'
-} else if (process.env.NODE_ENV === 'development') {
-  baseURL = 'http://123.207.32.32:8000'
+// const BASE_URL = 'http://coderwhy.org/test'
+// const BASE_NAME = 'james'
+
+// 2.根据process.env.NODE_ENV区分
+// 开发环境: development
+// 生成环境: production
+// 测试环境: test
+
+let BASE_URL = ''
+const TIME_OUT = 10000
+
+if (process.env.NODE_ENV === 'development') {
+  BASE_URL = '/api'
+} else if (process.env.NODE_ENV === 'production') {
+  BASE_URL = 'http://coderwhy.org/prod'
 } else {
-  baseURL = 'https://coderwhy/org/test'
+  BASE_URL = 'http://coderwhy.org/test'
 }
-export { baseURL, timeout }
 
-// 3.区分环境变量方式三: 加载.env文件
-// export const API_BASE_URL = process.env.VUE_APP_BASE_URL
-
-// export const TIME_OUT = 10000
+export { BASE_URL, TIME_OUT }
