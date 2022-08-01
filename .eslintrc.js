@@ -15,28 +15,35 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'vue/multi-word-component-names': [
-      'error',
-      {
-        ignores: [
-          'login',
-          'main',
-          'chat',
-          'list',
-          'department',
-          'menu',
-          'role',
-          'user',
-          'category',
-          'goods',
-          'dashboard',
-          'overview'
-        ]
-      }
-    ],
+    // 'vue/multi-word-component-names': [
+    //   'error',
+    //   {
+    //     ignores: [
+    //       'login',
+    //       'main',
+    //       'chat',
+    //       'list',
+    //       'department',
+    //       'menu',
+    //       'role',
+    //       'user',
+    //       'category',
+    //       'goods',
+    //       'dashboard',
+    //       'overview',
+    //       'breadcrumb',
+    //       'card',
+    //       'form',
+    //       'table',
+    //       'nav-header',
+    //       'user'
+    //     ]
+    //   }
+    // ],
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'off'
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    'vue/multi-word-component-names': 'off'
   }
 }
