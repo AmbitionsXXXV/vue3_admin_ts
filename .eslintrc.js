@@ -18,11 +18,25 @@ module.exports = {
     'vue/multi-word-component-names': [
       'error',
       {
-        ignores: ['login', 'main']
+        ignores: [
+          'login',
+          'main',
+          'chat',
+          'list',
+          'department',
+          'menu',
+          'role',
+          'user',
+          'category',
+          'goods',
+          'dashboard',
+          'overview'
+        ]
       }
     ],
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off'
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off'
   }
 }
